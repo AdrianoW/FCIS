@@ -13,6 +13,7 @@ from setuptools import setup
 from distutils.extension import Extension
 from Cython.Distutils import build_ext
 import subprocess
+from future.utils import iteritems
 
 #change for windows, by MrX
 nvcc_bin = 'nvcc.exe'
@@ -62,7 +63,7 @@ def locate_cuda():
     cudaconfig = {'home':home, 'nvcc':nvcc,
                   'include': pjoin(home, 'include'),
                   'lib64': pjoin(home, lib_dir)}
-    for k, v in cudaconfig.iteritems():
+    for k, v in iteritems(cudaconfig):
         if not os.path.exists(v):
             raise EnvironmentError('The CUDA %s path could not be located in %s' % (k, v))
 
